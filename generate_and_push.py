@@ -45,6 +45,18 @@ if "post_title" not in columns:
     
 conn.commit()
 
+# --- 3. Mermaid Sanitizer Function ---
+def sanitize_mermaid(content):
+    """Finds Mermaid code blocks and removes characters that cause syntax crashes."""
+    def clean_block(match):
+        mermaid_code = match.group(1)
+        # Replace dangerous characters with safe alternatives
+        mermaid_code = mermaid_code.replace('(', '').replace(')', '').replace('"', '').replace('&', 'and')
+        return f"```mermaid\n{mermaid_code}\n```"
+    
+    # Use Regex to find any block starting with ```mermaid and ending with ```
+    return re.sub(r'```mermaid\n(.*?)\n```', clean_block, content, flags=re.DOTALL)
+
 # --- 3. Model Configuration ---
 models_to_try = [
     "gemini-3-flash",
@@ -98,11 +110,14 @@ for selected_topic in topics:
             print(f" -> {model_name} failed: {e}. Trying next...")
 
     # --- 5. Save Blog Post & Extract Title (If Success) ---
-    if status == "Success":
-        # Extract the first H1 tag (# Title)
-        title_match = re.search(r'^#\s+(.*)', blog_content, re.MULTILINE)
-        if title_match:
-            extracted_title = title_match.group(1).strip()
+
+        if status == "Success":
+            # NEW: Clean the AI's output before doing anything else
+            blog_content = sanitize_mermaid(blog_content)
+        
+            title_match = re.search(r'^#\s+(.*)', blog_content, re.MULTILINE)
+            if title_match:
+                extracted_title = title_match.group(1).strip()
 
         filename = f"content/posts/{selected_topic.lower().replace(' ', '-')}-{date_str}.md"
         full_path = os.path.join(BASE_DIR, filename)
