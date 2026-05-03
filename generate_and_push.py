@@ -1,6 +1,7 @@
 import os
 import subprocess
 import sqlite3
+import time
 from datetime import datetime
 from dotenv import load_dotenv
 from google import genai
@@ -10,14 +11,14 @@ load_dotenv()
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 
 if not GEMINI_API_KEY:
-    raise ValueError("GEMINI_API_KEY not found. Please ensure your .env file is set up correctly.")
+    raise ValueError("GEMINI_API_KEY not found.")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 client = genai.Client(api_key=GEMINI_API_KEY)
 
+# --- Future Phase 2 Setup ---
+# In Phase 2, we will replace this hardcoded list by fetching from the SQLite DB.
 topics = ["Science", "Chemistry", "HR Trends", "Mathematics"]
-day_of_year = datetime.now().timetuple().tm_yday
-selected_topic = topics[day_of_year % len(topics)]
 date_str = datetime.utcnow().strftime('%Y-%m-%d')
 human_date = datetime.utcnow().strftime('%B %d, %Y')
 
@@ -36,61 +37,63 @@ cursor.execute('''
 ''')
 conn.commit()
 
-# --- 3. Model Fallback Logic ---
-models_to_try = [
-    "gemini-2.5-flash",
-    "gemini-1.5-flash",
-    "gemini-1.5-flash-8b"
-]
+models_to_try = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-1.5-flash-8b"]
 
-prompt = f"""
-Write a fresh, insightful, and concise blog post based on recent market or news trends in the field of {selected_topic}.
-Include the title, date, and body formatted in Markdown. 
-CRITICAL REQUIREMENT: You MUST include at least one high-level flow diagram, process chart, or architectural diagram illustrating a core concept from the article. The diagram MUST be written using Mermaid.js syntax inside a ```mermaid code block.
-Do not include frontmatter, just the content.
-"""
+print(f"Starting daily generation for {len(topics)} topics...")
 
-blog_content = ""
-used_model = "None"
-status = "Failed - Exhausted Limits"
+# --- 3. The Core Generation Loop ---
+for selected_topic in topics:
+    print(f"\n[ Processing: {selected_topic} ]")
+    
+    prompt = f"""
+    Write a fresh, insightful, and concise blog post based on recent market or news trends in the field of {selected_topic}.
+    Include the title, date, and body formatted in Markdown. 
+    CRITICAL REQUIREMENT: You MUST include at least one high-level flow diagram, process chart, or architectural diagram illustrating a core concept from the article. The diagram MUST be written using Mermaid.js syntax inside a ```mermaid code block.
+    Do not include frontmatter, just the content.
+    """
 
-for model_name in models_to_try:
-    try:
-        print(f"Attempting generation with {model_name}...")
-        response = client.models.generate_content(
-            model=model_name,
-            contents=prompt,
-        )
-        blog_content = response.text
-        used_model = model_name
-        status = "Success"
-        break  
-    except Exception as e:
-        print(f"{model_name} failed: {e}. Falling back to next model...")
+    blog_content = ""
+    used_model = "None"
+    status = "Failed - Exhausted Limits"
 
-# --- 4. Save Blog Post (If Success) ---
-if status == "Success":
-    filename = f"content/posts/{selected_topic.lower().replace(' ', '-')}-{date_str}.md"
-    full_path = os.path.join(BASE_DIR, filename)
-    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+    for model_name in models_to_try:
+        try:
+            response = client.models.generate_content(model=model_name, contents=prompt)
+            blog_content = response.text
+            used_model = model_name
+            status = "Success"
+            print(f" -> Success with {model_name}")
+            break  
+        except Exception as e:
+            print(f" -> {model_name} failed: {e}. Trying next...")
 
-    frontmatter = f"""---
+    # Save Blog Post (If Success)
+    if status == "Success":
+        filename = f"content/posts/{selected_topic.lower().replace(' ', '-')}-{date_str}.md"
+        full_path = os.path.join(BASE_DIR, filename)
+        os.makedirs(os.path.dirname(full_path), exist_ok=True)
+
+        frontmatter = f"""---
 title: "{selected_topic} Daily Update: {human_date}"
 date: "{datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')}Z"
 draft: false
 tags: ["{selected_topic}"]
 ---
 """
-    with open(full_path, "w", encoding="utf-8") as f:
-        f.write(frontmatter + blog_content)
+        with open(full_path, "w", encoding="utf-8") as f:
+            f.write(frontmatter + blog_content)
 
-# --- 5. Log to Database ---
-cursor.execute("INSERT INTO logs (publish_date, topic, model_used, status) VALUES (?, ?, ?, ?)", 
-               (date_str, selected_topic, used_model, status))
-conn.commit()
+    # Log to Database
+    cursor.execute("INSERT INTO logs (publish_date, topic, model_used, status) VALUES (?, ?, ?, ?)", 
+                   (date_str, selected_topic, used_model, status))
+    conn.commit()
+    
+    # Sleep to prevent hitting free-tier API rate limits
+    time.sleep(5) 
 
-# --- 6. Generate Admin Dashboard Page ---
-cursor.execute("SELECT publish_date, topic, model_used, status FROM logs ORDER BY id DESC LIMIT 10")
+# --- 4. Generate Admin Dashboard Page ---
+# Fetch the last 20 logs so you can see multiple days of the 4 topics
+cursor.execute("SELECT publish_date, topic, model_used, status FROM logs ORDER BY id DESC LIMIT 20")
 recent_logs = cursor.fetchall()
 
 admin_md = f"""---
@@ -116,10 +119,10 @@ with open(admin_path, "w", encoding="utf-8") as f:
 
 conn.close()
 
-# --- 7. Git Push ---
+# --- 5. Git Push ---
 os.chdir(BASE_DIR)
 subprocess.run(["git", "add", "."])
-subprocess.run(["git", "commit", "-m", f"Auto-post: {selected_topic} & Admin Update (Fixed Timezone)"])
+subprocess.run(["git", "commit", "-m", f"Auto-post: All Topics for {date_str}"])
 subprocess.run(["git", "push", "origin", "main"])
 
-print(f"Process complete. Final Status: {status}")
+print("\nAll topics processed and pushed successfully.")

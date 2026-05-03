@@ -4,8 +4,16 @@
     <p class="text-lg text-gray-600">Automated intelligence across Science, Chemistry, HR, and Mathematics.</p>
 </div>
 
+<div class="flex flex-wrap justify-center gap-3 mb-10">
+    {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+    <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-semibold text-gray-700 hover:border-blue-500 hover:text-blue-600 transition-colors shadow-sm">
+        {{ $name | humanize }}
+    </a>
+    {{ end }}
+</div>
+
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    {{ range .Site.RegularPages }}
+    {{ range where .Site.RegularPages "Section" "posts" }}
     <a href="{{ .RelPermalink }}" class="block bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-300 transition-all duration-200">
         <div class="flex items-center gap-2 mb-3">
             <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold uppercase tracking-wide">
