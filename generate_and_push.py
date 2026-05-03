@@ -47,9 +47,10 @@ conn.commit()
 
 # --- 3. Model Configuration ---
 models_to_try = [
+    "gemini-3-flash",
     "gemini-2.5-flash",
-    "gemini-1.5-flash",
-    "gemini-1.5-flash-8b"
+    "gemini-3.1-flash-lite",
+    "gemini-2.5-flash-lite"
 ]
 
 print(f"Starting daily generation for {len(topics)} topics...")
