@@ -35,7 +35,7 @@ jobs:
           hugo-version: 'latest'
           extended: true
       - name: Build with Hugo
-        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: hugo --minify --baseURL "https://pulse.ajcloudtech.in/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
