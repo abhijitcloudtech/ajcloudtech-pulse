@@ -16,7 +16,9 @@ selected_topic = topics[day_of_year % len(topics)]
 
 prompt = f"""
 Write a fresh, insightful, and concise blog post based on recent market or news trends in the field of {selected_topic}.
-Include the title, date, and body formatted in Markdown. Do not include frontmatter, just the content.
+Include the title, date, and body formatted in Markdown. 
+CRITICAL REQUIREMENT: You MUST include at least one high-level flow diagram, process chart, or architectural diagram illustrating a core concept from the article. The diagram MUST be written using Mermaid.js syntax inside a ```mermaid code block.
+Do not include frontmatter, just the content.
 """
 
 response = model.generate_content(prompt)

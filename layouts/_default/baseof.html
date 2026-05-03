@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} | Pulse Insights</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+    
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-5xl mx-auto px-4 py-6 flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold text-blue-600 tracking-tight">Pulse Insights</a>
+            <nav class="text-sm font-medium text-gray-600">
+                <a href="/" class="hover:text-blue-600">Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-5xl mx-auto px-4 py-10 w-full">
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8 text-center text-gray-500 text-sm">
+        <p>&copy; {{ now.Year }} ajcloudtech.in. Automated AI Insights.</p>
+    </footer>
+
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ 
+          startOnLoad: true, 
+          theme: 'base',
+          themeVariables: {
+              primaryColor: '#eff6ff',
+              primaryTextColor: '#1e3a8a',
+              primaryBorderColor: '#bfdbfe',
+              lineColor: '#3b82f6'
+          }
+      });
+    </script>
+</body>
+</html>
+
