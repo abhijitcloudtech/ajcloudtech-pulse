@@ -2,12 +2,20 @@ import os
 import subprocess
 import sqlite3
 from datetime import datetime
-import google.generativeai as genai
+from dotenv import load_dotenv
+from google import genai
 
-# --- Configuration ---
-GITHUB_REPO_PATH = "/home/ubuntu/ajcloudtech-pulse" # Update path if needed
-GEMINI_API_KEY = "YOUR_API_KEY_HERE"
-genai.configure(api_key=GEMINI_API_KEY)
+# --- 1. Security & Configuration ---
+# Load the API key securely from the local .env file
+load_dotenv()
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+
+if not GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY not found. Please ensure your .env file is set up correctly.")
+
+# Automatically detect the current directory instead of hardcoding /home/ubuntu/
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 # Daily Topic Selection
 topics = ["Science", "Chemistry", "HR Trends", "Mathematics"]
@@ -16,8 +24,8 @@ selected_topic = topics[day_of_year % len(topics)]
 date_str = datetime.now().strftime('%Y-%m-%d')
 human_date = datetime.now().strftime('%B %d, %Y')
 
-# --- 1. Database Setup ---
-db_path = os.path.join(GITHUB_REPO_PATH, "blog_admin.db")
+# --- 2. Database Setup ---
+db_path = os.path.join(BASE_DIR, "blog_admin.db")
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 cursor.execute('''
@@ -31,13 +39,12 @@ cursor.execute('''
 ''')
 conn.commit()
 
-# --- 2. Model Fallback Logic ---
-# Note: Ensure these exact string names match Google's active API endpoints
+# --- 3. Model Fallback Logic ---
+# Note: Google's new model naming conventions
 models_to_try = [
-    "gemini-3-flash", 
-    "gemini-2.5-flash", 
-    "gemini-3.1-flash-lite", 
-    "gemini-2.5-flash-lite"
+    "gemini-2.5-flash",
+    "gemini-1.5-flash",
+    "gemini-1.5-flash-8b"
 ]
 
 prompt = f"""
@@ -54,19 +61,21 @@ status = "Failed - Exhausted Limits"
 for model_name in models_to_try:
     try:
         print(f"Attempting generation with {model_name}...")
-        model = genai.GenerativeModel(model_name)
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model=model_name,
+            contents=prompt,
+        )
         blog_content = response.text
         used_model = model_name
         status = "Success"
-        break # Exit loop if successful
+        break  # Exit loop if successful
     except Exception as e:
         print(f"{model_name} failed: {e}. Falling back to next model...")
 
-# --- 3. Save Blog Post (If Success) ---
+# --- 4. Save Blog Post (If Success) ---
 if status == "Success":
     filename = f"content/posts/{selected_topic.lower().replace(' ', '-')}-{date_str}.md"
-    full_path = os.path.join(GITHUB_REPO_PATH, filename)
+    full_path = os.path.join(BASE_DIR, filename)
     os.makedirs(os.path.dirname(full_path), exist_ok=True)
 
     frontmatter = f"""---
@@ -79,13 +88,12 @@ tags: ["{selected_topic}"]
     with open(full_path, "w", encoding="utf-8") as f:
         f.write(frontmatter + blog_content)
 
-# --- 4. Log to Database ---
+# --- 5. Log to Database ---
 cursor.execute("INSERT INTO logs (publish_date, topic, model_used, status) VALUES (?, ?, ?, ?)", 
                (date_str, selected_topic, used_model, status))
 conn.commit()
 
-# --- 5. Generate Admin Dashboard Page ---
-# Fetch the last 10 logs
+# --- 6. Generate Admin Dashboard Page ---
 cursor.execute("SELECT publish_date, topic, model_used, status FROM logs ORDER BY id DESC LIMIT 10")
 recent_logs = cursor.fetchall()
 
@@ -106,15 +114,15 @@ for log in recent_logs:
     status_icon = "✅" if log[3] == "Success" else "❌"
     admin_md += f"| {log[0]} | {log[1]} | `{log[2]}` | {status_icon} {log[3]} |\n"
 
-admin_path = os.path.join(GITHUB_REPO_PATH, "content/admin.md")
+admin_path = os.path.join(BASE_DIR, "content/admin.md")
 with open(admin_path, "w", encoding="utf-8") as f:
     f.write(admin_md)
 
 conn.close()
 
-# --- 6. Git Push ---
-os.chdir(GITHUB_REPO_PATH)
-subprocess.run(["git", "add", "."]) # Add both the post, the admin page, and the db
+# --- 7. Git Push ---
+os.chdir(BASE_DIR)
+subprocess.run(["git", "add", "."])
 subprocess.run(["git", "commit", "-m", f"Auto-post: {selected_topic} & Admin Update"])
 subprocess.run(["git", "push", "origin", "main"])
 
