@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-gray-100 mt-8">
+    <h1 class="text-3xl font-extrabold text-gray-900 mb-8 border-b pb-4">Search Insights</h1>
+    
+    <div id="search"></div>
+
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    <script src="/pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ 
+                element: "#search",
+                showSubResults: true,
+                showImages: false
+            });
+        });
+    </script>
+</div>
+{{ end }}
