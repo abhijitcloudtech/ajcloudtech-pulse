@@ -11,9 +11,15 @@
     <header class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-5xl mx-auto px-4 py-6 flex justify-between items-center">
             <a href="/" class="text-2xl font-bold text-blue-600 tracking-tight">Pulse Insights</a>
-            <nav class="text-sm font-medium text-gray-600">
-                <a href="/" class="hover:text-blue-600">Home</a>
-                <a href="/search/" class="hover:text-blue-600">Search</a>
+            <nav class="text-sm font-medium text-gray-600 flex items-center gap-6">
+                <a href="/" class="hover:text-blue-600 transition-colors">Home</a>
+                
+                <a href="/search/" class="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2005/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                    Search
+                </a>
             </nav>
         </div>
     </header>
@@ -23,7 +29,7 @@
     </main>
 
     <footer class="bg-white border-t border-gray-200 mt-12 py-8 text-center text-gray-500 text-sm">
-        <p>&copy; {{ now.Year }} ajcloudtech.in. Automated AI Insights.</p>
+        <p>&copy; {{ now.Year }} ajcloudtech.in.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
