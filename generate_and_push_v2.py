@@ -6,20 +6,23 @@ from dotenv import load_dotenv
 from google import genai
 
 # --- 1. Security & Configuration ---
+# Load the API key securely from the local .env file
 load_dotenv()
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 
 if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY not found. Please ensure your .env file is set up correctly.")
 
+# Automatically detect the current directory instead of hardcoding /home/ubuntu/
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 client = genai.Client(api_key=GEMINI_API_KEY)
 
+# Daily Topic Selection
 topics = ["Science", "Chemistry", "HR Trends", "Mathematics"]
 day_of_year = datetime.now().timetuple().tm_yday
 selected_topic = topics[day_of_year % len(topics)]
-date_str = datetime.utcnow().strftime('%Y-%m-%d')
-human_date = datetime.utcnow().strftime('%B %d, %Y')
+date_str = datetime.now().strftime('%Y-%m-%d')
+human_date = datetime.now().strftime('%B %d, %Y')
 
 # --- 2. Database Setup ---
 db_path = os.path.join(BASE_DIR, "blog_admin.db")
@@ -37,6 +40,7 @@ cursor.execute('''
 conn.commit()
 
 # --- 3. Model Fallback Logic ---
+# Note: Google's new model naming conventions
 models_to_try = [
     "gemini-2.5-flash",
     "gemini-1.5-flash",
@@ -64,7 +68,7 @@ for model_name in models_to_try:
         blog_content = response.text
         used_model = model_name
         status = "Success"
-        break  
+        break  # Exit loop if successful
     except Exception as e:
         print(f"{model_name} failed: {e}. Falling back to next model...")
 
@@ -76,7 +80,7 @@ if status == "Success":
 
     frontmatter = f"""---
 title: "{selected_topic} Daily Update: {human_date}"
-date: "{datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')}Z"
+date: "{datetime.now().strftime('%Y-%m-%dT%H:%M:%S%z')}Z"
 draft: false
 tags: ["{selected_topic}"]
 ---
@@ -95,7 +99,7 @@ recent_logs = cursor.fetchall()
 
 admin_md = f"""---
 title: "System Admin Dashboard"
-date: "{datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')}Z"
+date: "{datetime.now().strftime('%Y-%m-%dT%H:%M:%S%z')}Z"
 draft: false
 type: "page"
 layout: "admin"
@@ -119,7 +123,7 @@ conn.close()
 # --- 7. Git Push ---
 os.chdir(BASE_DIR)
 subprocess.run(["git", "add", "."])
-subprocess.run(["git", "commit", "-m", f"Auto-post: {selected_topic} & Admin Update (Fixed Timezone)"])
+subprocess.run(["git", "commit", "-m", f"Auto-post: {selected_topic} & Admin Update"])
 subprocess.run(["git", "push", "origin", "main"])
 
 print(f"Process complete. Final Status: {status}")
