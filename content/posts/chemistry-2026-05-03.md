@@ -20,12 +20,12 @@ The following diagram illustrates the high-level process of enzymatic plastic re
 
 ```mermaid
 graph TD
-    A[Post-Consumer PET Waste (Bottles, Fibers)] --> B(Collection & Pre-treatment: Sorting, Shredding, Washing);
-    B --> C{Enzymatic Depolymerization Reactor};
-    C -- "PET-Hydrolyzing Enzymes (e.g., LCC, PETase)" --> D[Monomer Separation & Purification (e.g., Terephthalic Acid, Ethylene Glycol / BHET)];
-    D --> E(Repolymerization);
-    E --> F[New, Virgin-Quality PET Products (Bottles, Textiles, Films)];
-    F -- "Enables Circular Economy" --> A;
+    A[Post-Consumer PET Waste] --> B(Collection and Pre-treatment)
+    B --> C{Enzymatic Depolymerization Reactor}
+    C -- PET-Hydrolyzing Enzymes --> D[Monomer Separation and Purification]
+    D --> E(Repolymerization)
+    E --> F[New Virgin-Quality PET Products]
+    F -- Enables Circular Economy --> A
 
     style A fill:#fcf,stroke:#333,stroke-width:2px;
     style C fill:#9cf,stroke:#333,stroke-width:2px;
