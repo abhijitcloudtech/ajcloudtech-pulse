@@ -35,7 +35,18 @@ jobs:
           hugo-version: 'latest'
           extended: true
       - name: Build with Hugo
-        run: hugo --minify --baseURL "https://pulse.ajcloudtech.in/"
+        run: hugo --minify --buildFuture --baseURL "https://pulse.ajcloudtech.in/"
+        
+      # NEW: Explicitly setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # FIX: Added the '-y' flag so it doesn't wait for human input
+      - name: Index with Pagefind
+        run: npx -y pagefind --site public 
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
