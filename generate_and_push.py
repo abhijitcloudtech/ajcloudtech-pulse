@@ -139,7 +139,7 @@ tags: ["{selected_topic}"]
     conn.commit()
     
     # Sleep to prevent hitting free-tier API rate limits
-    time.sleep(5) 
+    time.sleep(20) 
 
 # --- 7. Generate Admin Dashboard Page ---
 cursor.execute("SELECT publish_date, topic, post_title, model_used, status FROM logs ORDER BY id DESC LIMIT 20")
