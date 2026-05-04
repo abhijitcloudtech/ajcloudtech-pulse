@@ -15,7 +15,7 @@ The ability to precisely engineer MOF glasses opens doors to addressing critical
 
 ```mermaid
 graph TD
-    A[Metal Organic Frameworks MOFs] --> BMOF Glass Formation
+    A[Metal Organic Frameworks MOFs] --> [BMOF Glass Formation]
     B --> C{Addition of Chemical Modifiers}
     C --> D[Sodium or Lithium Compounds]
     D --> E{Altered Glass Properties}
