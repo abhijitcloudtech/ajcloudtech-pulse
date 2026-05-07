@@ -50,7 +50,7 @@ models_to_try = [
     "gemini-3-flash", 
     "gemini-3-flash-preview", 
     "gemini-2.5-flash", 
-    "gemini-1.5-flash"
+    "gemini-1.5-flash-latest"
 ]
 
 logging.info("--- Starting Production Run ---")
