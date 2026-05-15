@@ -5,6 +5,10 @@ layout: "admin"
 ### Daily Generation Status
 | Date | Topic | Title | Model | Status |
 |---|---|---|---|---|
+| 2026-05-15 | Mathematics | Mathematics Update | `gemini-2.5-flash` | ✅ Success |
+| 2026-05-15 | HR Trends | HR Trends Update | `gemini-2.5-flash` | ✅ Success |
+| 2026-05-15 | Chemistry | Chemistry Update | `gemini-2.5-flash` | ✅ Success |
+| 2026-05-15 | Science | Science Update | `gemini-2.5-flash` | ✅ Success |
 | 2026-05-14 | Mathematics | Mathematics Update | `gemini-2.5-flash` | ✅ Success |
 | 2026-05-14 | HR Trends | HR Trends Update | `gemini-2.5-flash` | ✅ Success |
 | 2026-05-14 | Chemistry | Chemistry Update | `gemini-2.5-flash` | ✅ Success |
@@ -21,7 +25,3 @@ layout: "admin"
 | 2026-05-09 | HR Trends | HR Trends Update | `gemini-2.5-flash` | ✅ Success |
 | 2026-05-09 | Chemistry | Chemistry Update | `gemini-2.5-flash` | ✅ Success |
 | 2026-05-09 | Science | Science Update | `gemini-2.5-flash` | ✅ Success |
-| 2026-05-08 | Mathematics | Mathematics Update | `gemini-2.5-flash` | ✅ Success |
-| 2026-05-08 | HR Trends | HR Trends Update | `gemini-2.5-flash` | ✅ Success |
-| 2026-05-08 | Chemistry | Chemistry Update | `gemini-2.5-flash` | ✅ Success |
-| 2026-05-08 | Science | Science Update | `gemini-2.5-flash` | ✅ Success |
