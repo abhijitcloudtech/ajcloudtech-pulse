@@ -3457,3 +3457,49 @@
 2026-07-18 04:31:48 - INFO - Trying gemini-2.5-flash for Mathematics...
 2026-07-18 04:31:48 - INFO - AFC is enabled with max remote calls: 10.
 2026-07-18 04:32:10 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-07-18 04:32:32 - INFO - Run Complete.
+2026-07-19 04:30:04 - INFO - --- Starting Production Run ---
+2026-07-19 04:30:04 - INFO - Trying gemini-3-flash for Science...
+2026-07-19 04:30:04 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:30:04 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-07-19 04:30:04 - WARNING - gemini-3-flash failed: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-07-19 04:30:04 - INFO - Trying gemini-3-flash-preview for Science...
+2026-07-19 04:30:04 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:30:04 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 429 Too Many Requests"
+2026-07-19 04:30:04 - WARNING - gemini-3-flash-preview failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. ', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}]}}
+2026-07-19 04:30:04 - INFO - Trying gemini-2.5-flash for Science...
+2026-07-19 04:30:04 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:30:15 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-07-19 04:30:35 - INFO - Trying gemini-3-flash for Chemistry...
+2026-07-19 04:30:35 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:30:35 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-07-19 04:30:35 - WARNING - gemini-3-flash failed: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-07-19 04:30:35 - INFO - Trying gemini-3-flash-preview for Chemistry...
+2026-07-19 04:30:35 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:30:36 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 429 Too Many Requests"
+2026-07-19 04:30:36 - WARNING - gemini-3-flash-preview failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. ', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}]}}
+2026-07-19 04:30:36 - INFO - Trying gemini-2.5-flash for Chemistry...
+2026-07-19 04:30:36 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:30:48 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-07-19 04:31:08 - INFO - Trying gemini-3-flash for HR Trends...
+2026-07-19 04:31:08 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:31:08 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-07-19 04:31:08 - WARNING - gemini-3-flash failed: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-07-19 04:31:08 - INFO - Trying gemini-3-flash-preview for HR Trends...
+2026-07-19 04:31:08 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:31:08 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 429 Too Many Requests"
+2026-07-19 04:31:08 - WARNING - gemini-3-flash-preview failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. ', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}]}}
+2026-07-19 04:31:08 - INFO - Trying gemini-2.5-flash for HR Trends...
+2026-07-19 04:31:08 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:31:22 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-07-19 04:31:42 - INFO - Trying gemini-3-flash for Mathematics...
+2026-07-19 04:31:42 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:31:42 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-07-19 04:31:42 - WARNING - gemini-3-flash failed: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-07-19 04:31:42 - INFO - Trying gemini-3-flash-preview for Mathematics...
+2026-07-19 04:31:42 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:31:43 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent "HTTP/1.1 429 Too Many Requests"
+2026-07-19 04:31:43 - WARNING - gemini-3-flash-preview failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. ', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}]}}
+2026-07-19 04:31:43 - INFO - Trying gemini-2.5-flash for Mathematics...
+2026-07-19 04:31:43 - INFO - AFC is enabled with max remote calls: 10.
+2026-07-19 04:31:55 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
