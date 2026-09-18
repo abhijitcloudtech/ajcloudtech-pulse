@@ -5605,3 +5605,53 @@
 2026-09-18 04:31:54 - INFO - AFC is enabled with max remote calls: 10.
 2026-09-18 04:31:54 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent "HTTP/1.1 404 Not Found"
 2026-09-18 04:31:54 - WARNING - gemini-1.5-flash-latest failed: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash-latest is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-09-18 04:32:17 - INFO - Run Complete.
+2026-09-19 04:30:03 - INFO - --- Starting Production Run ---
+2026-09-19 04:30:03 - INFO - Trying gemini-3-flash for Science...
+2026-09-19 04:30:03 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:30:13 - WARNING - gemini-3-flash failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:30:13 - INFO - Trying gemini-3-flash-preview for Science...
+2026-09-19 04:30:13 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:30:23 - WARNING - gemini-3-flash-preview failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:30:23 - INFO - Trying gemini-2.5-flash for Science...
+2026-09-19 04:30:23 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:30:33 - WARNING - gemini-2.5-flash failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:30:33 - INFO - Trying gemini-1.5-flash-latest for Science...
+2026-09-19 04:30:33 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:30:43 - WARNING - gemini-1.5-flash-latest failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:31:03 - INFO - Trying gemini-3-flash for Chemistry...
+2026-09-19 04:31:03 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:31:13 - WARNING - gemini-3-flash failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:31:13 - INFO - Trying gemini-3-flash-preview for Chemistry...
+2026-09-19 04:31:13 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:31:23 - WARNING - gemini-3-flash-preview failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:31:23 - INFO - Trying gemini-2.5-flash for Chemistry...
+2026-09-19 04:31:23 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:31:33 - WARNING - gemini-2.5-flash failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:31:33 - INFO - Trying gemini-1.5-flash-latest for Chemistry...
+2026-09-19 04:31:33 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:31:43 - WARNING - gemini-1.5-flash-latest failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:32:03 - INFO - Trying gemini-3-flash for HR Trends...
+2026-09-19 04:32:03 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:32:13 - WARNING - gemini-3-flash failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:32:13 - INFO - Trying gemini-3-flash-preview for HR Trends...
+2026-09-19 04:32:13 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:32:23 - WARNING - gemini-3-flash-preview failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:32:23 - INFO - Trying gemini-2.5-flash for HR Trends...
+2026-09-19 04:32:23 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:32:33 - WARNING - gemini-2.5-flash failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:32:33 - INFO - Trying gemini-1.5-flash-latest for HR Trends...
+2026-09-19 04:32:33 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:32:43 - WARNING - gemini-1.5-flash-latest failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:33:03 - INFO - Trying gemini-3-flash for Mathematics...
+2026-09-19 04:33:03 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:33:13 - WARNING - gemini-3-flash failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:33:13 - INFO - Trying gemini-3-flash-preview for Mathematics...
+2026-09-19 04:33:13 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:33:23 - WARNING - gemini-3-flash-preview failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:33:23 - INFO - Trying gemini-2.5-flash for Mathematics...
+2026-09-19 04:33:23 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:33:33 - WARNING - gemini-2.5-flash failed: [Errno -3] Temporary failure in name resolution
+2026-09-19 04:33:33 - INFO - Trying gemini-1.5-flash-latest for Mathematics...
+2026-09-19 04:33:33 - INFO - AFC is enabled with max remote calls: 10.
+2026-09-19 04:33:43 - WARNING - gemini-1.5-flash-latest failed: [Errno -3] Temporary failure in name resolution
