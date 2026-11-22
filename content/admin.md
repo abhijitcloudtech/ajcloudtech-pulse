@@ -5,6 +5,10 @@ layout: "admin"
 ### Daily Generation Status
 | Date | Topic | Title | Model | Status |
 |---|---|---|---|---|
+| 2026-11-22 | Mathematics | Mathematics Update | `gemini-2.5-flash` | ✅ Success |
+| 2026-11-22 | HR Trends | HR Trends Update | `gemini-2.5-flash` | ✅ Success |
+| 2026-11-22 | Chemistry | Chemistry Update | `gemini-2.5-flash` | ✅ Success |
+| 2026-11-22 | Science | Science Update | `None` | ❌ Failed |
 | 2026-11-20 | Mathematics | Mathematics Update | `gemini-2.5-flash` | ✅ Success |
 | 2026-11-20 | HR Trends | HR Trends Update | `None` | ❌ Failed |
 | 2026-11-20 | Chemistry | Chemistry Update | `None` | ❌ Failed |
@@ -21,7 +25,3 @@ layout: "admin"
 | 2026-11-17 | HR Trends | HR Trends Update | `None` | ❌ Failed |
 | 2026-11-17 | Chemistry | Chemistry Update | `gemini-2.5-flash` | ✅ Success |
 | 2026-11-17 | Science | Science Update | `None` | ❌ Failed |
-| 2026-11-16 | Mathematics | Mathematics Update | `gemini-2.5-flash` | ✅ Success |
-| 2026-11-16 | HR Trends | HR Trends Update | `gemini-2.5-flash` | ✅ Success |
-| 2026-11-16 | Chemistry | Chemistry Update | `None` | ❌ Failed |
-| 2026-11-16 | Science | Science Update | `None` | ❌ Failed |
